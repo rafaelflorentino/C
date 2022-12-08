@@ -9,7 +9,7 @@
 main()
 {
     int numero[8];
-    int i, j;
+    int i;
     for (i = 0; i < 8; i++)
     {
         printf("Digite um numero: ");
@@ -17,9 +17,10 @@ main()
         fflush(stdin);
     }
     printf("\nMultiplos de 5 \n");
-    for (i = 0, j=1; i < 8; i++, j++){
+    
+    for (i = 0; i < 8; i++){
         if ((numero[i] % 5 == 0)){
-            printf("\n%d) Numero: %d ", j, numero[i]);
+            printf("\n%d) Numero: %d ", i, numero[i]);
         }
     }
 }
