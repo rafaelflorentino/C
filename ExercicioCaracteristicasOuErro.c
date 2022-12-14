@@ -1,7 +1,7 @@
 /* 
- Objetivo : Exibir uma listagem das carcteristicas do produto ou uma mensagem de erro.
+ Objetivo : Exibir uma listagem das caracteristicas do produto ou uma mensagem de erro.
  Entrada : Código, nome, quantidade, valor de compra valor de venda.
- Saida :  Listagem das carcteristicas do produto ou uma mensagem de erro.
+ Saida :  Listagem das caracteristicas do produto ou uma mensagem de erro.
  Aluno : Rafael Florentino.
 */
 #include <stdlib.h>
