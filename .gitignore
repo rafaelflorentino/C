@@ -1,2 +1,3 @@
 # Ignore todos os arquivos de texto
 *.exe
+*.vscode
