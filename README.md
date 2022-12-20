@@ -1,2 +1,2 @@
 # C
-Exercícios e programas Feitos na Linguagem C.
+Exercícios e Programas Feitos na Linguagem C.
