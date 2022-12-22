@@ -1,5 +1,5 @@
 /* 
- Objetivo : Escreva um programaem C que crie um arquivo vazio.
+ Objetivo : Escreva um programa em C que crie um arquivo vazio.
  Entrada : Nome do arquivo.
  Saida : Arquivo criado ou mensagem de erro.
  Aluno : Rafael Florentino.

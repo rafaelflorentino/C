@@ -10,7 +10,7 @@ int main()
 {
     int idade, mes, dias;
 
-    printf("Digite a suaidade: ");
+    printf("Digite a sua idade: ");
     scanf("%d", &idade);
     fflush(stdin);
 
