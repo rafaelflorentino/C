@@ -8,6 +8,7 @@
 #include <stdio.h>
 #include <conio.h>
 #include <math.h>
+#include <string.h>
 
 int cadastrarFilme(int *codigoFilme[100],  char *nomeFilme[100][100], char *generoFilme[100][100],int  *quantidadeFilmeDisponivel[100], int *qntSuspense);
 //int listarFilmes(int *codigoFilme[100],  char *nomeFilme[100][100], char *generoFilme[100][100],int  *quantidadeFilmeDisponivel[100]);
@@ -50,9 +51,20 @@ int cadastrarFilme(int *codigoFilme[100],  char *nomeFilme[100][100], char *gene
     fflush(stdin);
     printf("Digite o genero do Filme %d (Suspense, Terror, Romance, Comedia): ", i+1);
     gets(generoFilme[i]);
+    //scanf("%[^\n]", &generoFilme[i],100);
     fflush(stdin);
-    if(generoFilme[i] == 'suspense' || generoFilme[i] == 'Suspense'){
-      *qntSuspense++;
+    
+    char str1[100], str2[100];
+    strcpy(str1, "suspense");
+    strcpy(str2, generoFilme[i]);
+    int ret = strcmp(str1, str2);
+    if(ret == 0){
+       printf("E suspense!!! \n");
+      *qntSuspense = qntSuspense + 1;
+      printf("Quantidade Suspense: %d \n", *&qntSuspense);
+    }else{
+       printf("Nao e Suspense!!! \n");
+       printf("Genero: %s; \n", generoFilme[i]);
     }
     printf("Digite a quantidade do Filme %d: ", i+1);
     scanf("%d", &quantidadeFilmeDisponivel[i]);
