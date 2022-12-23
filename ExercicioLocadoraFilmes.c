@@ -9,27 +9,30 @@
 #include <conio.h>
 #include <math.h>
 
-int CadastrarFilme(int *codigoFilme[100],  char *nomeFilme[100][100], char *generoFilme[100][100],int  *quantidadeFilmeDisponivel[100]);
+int cadastrarFilme(int *codigoFilme[100],  char *nomeFilme[100][100], char *generoFilme[100][100],int  *quantidadeFilmeDisponivel[100], int *qntSuspense);
 //int listarFilmes(int *codigoFilme[100],  char *nomeFilme[100][100], char *generoFilme[100][100],int  *quantidadeFilmeDisponivel[100]);
 void listarFilmes();
 
 int main()
 {
-    int codigoFilme[100], quantidadeFilmeDisponivel[100];
+    int codigoFilme[100], quantidadeFilmeDisponivel[100], qntSuspense=0;
     char nomeFilme[100][100], generoFilme[100][100];
 
     printf("\n                 ************ Locadora Favorita ****************\n");
     printf("\n                     ********** Seja Bem Vindo ***********\n");
 
-    CadastrarFilme(&codigoFilme[100], &nomeFilme[100][100], &generoFilme[100][100], &quantidadeFilmeDisponivel[100]);
+    cadastrarFilme(&codigoFilme[100], &nomeFilme[100][100], &generoFilme[100][100], &quantidadeFilmeDisponivel[100], &qntSuspense);
     listarFilmes();
+    menu(&qntSuspense);
+
+    printf("\nQuantidade suspense: ",qntSuspense);
     
-    printf("\n                    ******** Fim do Programa **********\n");
+    printf("\n\n                    ******** Fim do Programa **********\n");
     getch();
     return 0;
 }
 
-int CadastrarFilme(int *codigoFilme[100],  char *nomeFilme[100][100], char *generoFilme[100][100],int  *quantidadeFilmeDisponivel[100]){
+int cadastrarFilme(int *codigoFilme[100],  char *nomeFilme[100][100], char *generoFilme[100][100],int  *quantidadeFilmeDisponivel[100], int *qntSuspense){
   int i = 0, j = 0;
   printf("\n                        ****** Cadastro de Filmes ********\n\n");
   printf("Digite a quantidade de filmes que voce deseja cadastrar: ");
@@ -48,6 +51,9 @@ int CadastrarFilme(int *codigoFilme[100],  char *nomeFilme[100][100], char *gene
     printf("Digite o genero do Filme %d (Suspense, Terror, Romance, Comedia): ", i+1);
     gets(generoFilme[i]);
     fflush(stdin);
+    if(generoFilme[i] == 'suspense' || generoFilme[i] == 'Suspense'){
+      *qntSuspense++;
+    }
     printf("Digite a quantidade do Filme %d: ", i+1);
     scanf("%d", &quantidadeFilmeDisponivel[i]);
     fflush(stdin);
@@ -63,6 +69,9 @@ int CadastrarFilme(int *codigoFilme[100],  char *nomeFilme[100][100], char *gene
     printf("Filme %d. Codigo: %d; Nome: %s; Genero: %s; Quantidade: %d; \n", i+1, codigoFilme[i], nomeFilme[i], generoFilme[i], quantidadeFilmeDisponivel[i]);
   }
   printf("\n                     **Fim da Lista de Filmes**\n\n");
+
+   printf("\nQuantidade suspense: ",qntSuspense);
+   printf("\n");
 
   //Criando um arquivo e salvando os dados nele
     FILE *arquivo;
@@ -80,8 +89,10 @@ int CadastrarFilme(int *codigoFilme[100],  char *nomeFilme[100][100], char *gene
 
         for (i = 0; i < j; i++)
         {
-            fprintf(arquivoEntrada,"%d %s %s %d \n", codigoFilme[i], nomeFilme[i], generoFilme[i], quantidadeFilmeDisponivel[i]);
+          fprintf(arquivoEntrada,"%d %s %s %d \n", codigoFilme[i], nomeFilme[i], generoFilme[i], quantidadeFilmeDisponivel[i]);
         }
+        printf("\nO arquivo foi acessado com sucesso!!! \n");
+
         fclose(arquivoEntrada);
         fclose(arquivo);
     } 
@@ -104,5 +115,48 @@ void listarFilmes(){
   fclose(arquivo);
   printf("\n");
   system("PAUSE");
+  return;
+}
+void menu(int *qntSuspense){
+  int opcaoMenu, auxiliar = 0;
+  auxiliar = *qntSuspense;
+  printf("\n\n                                ****Menu***"); 
+  printf("\n\n *** Digite 1 Para Consultar um filme. ***");
+  printf("\n\n *** Digite 2 Para reservar um filme. ***");
+  printf("\n\n *** Digite 3 para ver a Quantidade de filmes de Suspense. ***");
+  printf("\n\n *** Digite 4 Para sair. ***");
+  printf("\n\n *** Digite o numero da opcao: ");
+  scanf("%d", &opcaoMenu);
+  fflush(stdin);
+  switch (opcaoMenu)
+  {   
+  case 1:
+    MenuConsultarFilme();
+    break;
+  case 2:
+    ReservarFilme();
+    break;
+  case 3:
+    printf("\n Quantidade de filmes de Suspense: %d", auxiliar);
+    break;
+  case 4:
+    printf("\nPrograma Encerrado.\n");
+    system("pause");
+  }
+  return;
+}
+
+/*Quando a opção escolhida for Consultar Filme, deverá ser
+disponibilizado mais um menu com as seguintes opções:
+ (*)Consultar Filme pelo código
+ (*)Consultar Filme pelo título
+ Sair da Consulta
+O sistema deverá dizer se esse filme foi cadastrado ou não, caso exista 
+informar os dados cadastrados desse filme.*/
+void MenuConsultarFilme(){
+  return;
+}
+
+void  ReservarFilme(){
   return;
 }
