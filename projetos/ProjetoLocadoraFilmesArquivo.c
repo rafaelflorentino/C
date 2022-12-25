@@ -76,7 +76,7 @@ void cadastrarFilme(){
 
   for (i = 0; i < j; i++) 
   {
-    printf("\n                        ***** Filme %d *****\n\n",i+1);
+    printf("\n                       ***** Filme %d *****\n\n",i+1);
     printf("Digite o codigo do Filme %d: ", i+1);
     scanf("%d", &Filme.codigo[i]);
     fflush(stdin);
