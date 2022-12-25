@@ -1,5 +1,5 @@
 /*
- Objetivo : Locadora, cadastrar filmes
+ Objetivo : Projeto Locadora, cadastrar filmes, cadastrar e salvar em arquivo .txt, ler arquio .txt e imprimir na tela.
  Entrada : Codigo, nome, quantidade, genero.
  Saida : Filmes cadastrados.
  Aluno : Rafael Florentino.
@@ -33,7 +33,7 @@ int main()
 void menuPrincipal(){
   int opcaoMenu, auxiliar = 0;
   auxiliar = Filme.quantidadeSuspense;
-  printf("\n                                **** Menu Principal ***"); 
+  printf("\n                               **** Menu Principal ***"); 
   printf("\n *** Digite 1 Para Cadastrar filmes. ***");
   printf("\n *** Digite 2 Para Listar Todos os filmes. ***");
   printf("\n *** Digite 3 Para Consultar um filme. ***");
