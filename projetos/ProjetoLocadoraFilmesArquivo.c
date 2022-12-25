@@ -156,14 +156,6 @@ void listarFilmes(){
   system("PAUSE");
   menuPrincipal();
 }
-
-/*Quando a opção escolhida for Consultar Filme, deverá ser
-disponibilizado mais um menu com as seguintes opções:
- (*)Consultar Filme pelo código
- (*)Consultar Filme pelo título
- Sair da Consulta
-O sistema deverá dizer se esse filme foi cadastrado ou não, caso exista 
-informar os dados cadastrados desse filme.*/
 void MenuConsultarFilme(){
   menuPrincipal();
   return;
