@@ -15,25 +15,36 @@ struct estrutura
   int codigo[100], quantidadeDisponivel[100], totalCadastrado, quantidadeSuspense, reservados[100];
   char nome[100][100], genero[100][100];
 
-} Filme; 
+} Filme;
+
+struct estrutura2
+{
+  int codigo[100], quantidadeDisponivel[100], totalCadastrado, quantidadeSuspense, reservados[100];
+  char nome[100][100], genero[100][100];
+
+} FilmeArquivo;
+
 void cadastrarFilme();
+void cadastrarMaisFilmes();
 void listarFilmes();
 void menuPrincipal();
 
+
 int main()
 {
-    printf("\n                 ************ Locadora Favorita ****************\n");
-    printf("\n                     ********** Seja Bem Vindo ***********\n");
-    menuPrincipal();    
-    printf("\n\n                    ******** Fim do Programa **********\n");
-    getch();
-    return 0;
+  printf("\n                 ************ Locadora Favorita ****************\n");
+  printf("\n                     ********** Seja Bem Vindo ***********\n");
+  Filme.totalCadastrado = 0;
+  menuPrincipal();
+  printf("\n\n                    ******** Fim do Programa **********\n");
+  getch();
+  return 0;
 }
 
-void menuPrincipal(){
+void menuPrincipal()
+{
   int opcaoMenu, auxiliar = 0;
-  auxiliar = Filme.quantidadeSuspense;
-  printf("\n                               **** Menu Principal ***"); 
+  printf("\n                               **** Menu Principal ***");
   printf("\n *** Digite 1 Para Cadastrar filmes. ***");
   printf("\n *** Digite 2 Para Listar Todos os filmes. ***");
   printf("\n *** Digite 3 Para Consultar um filme. ***");
@@ -44,99 +55,181 @@ void menuPrincipal(){
   scanf("%d", &opcaoMenu);
   fflush(stdin);
   switch (opcaoMenu)
-  {   
+  {
   case 1:
-    cadastrarFilme(); 
+    if(Filme.totalCadastrado == 0){
+      cadastrarFilme();
+    }else{
+      cadastrarMaisFilmes();
+    }    
     break;
   case 2:
-    listarFilmes();   
+    listarFilmes();
     break;
   case 3:
+    system("pause");
     MenuConsultarFilme();
     break;
   case 4:
+    system("pause");
     ReservarFilme();
     break;
   case 5:
-    printf("\n Quantidade de filmes de Suspense: %d", auxiliar);
+    printf("\n Quantidade de filmes de Suspense: %d\n", Filme.quantidadeSuspense);
+    printf("\n");
+    system("pause");
     menuPrincipal();
     break;
-  case 6:
+  case 6:    
     printf("\nPrograma Encerrado.\n");
     system("pause");
-    break;    
+    break;
   }
 }
 
-void cadastrarFilme(){
+void cadastrarFilme()
+{
+  // Cadastrando Primeiros Filmes
   int i = 0, j = 0;
-  printf("\n                        ****** Cadastro de Filmes ********\n\n");
+  printf("\nNenhum filme cadastrado: %d\n", Filme.totalCadastrado);
+  printf("\n                        ****** Primeiro Cadastro de Filmes ********\n\n");
   printf("Digite a quantidade de filmes que voce deseja cadastrar: ");
   scanf("%d", &j);
 
-  for (i = 0; i < j; i++) 
+  for (i = 0; i < j; i++)
   {
-    printf("\n                       ***** Filme %d *****\n\n",i+1);
-    printf("Digite o codigo do Filme %d: ", i+1);
+    printf("\n                       ***** Filme %d *****\n\n", i + 1);
+    printf("Digite o codigo do Filme %d: ", i + 1);
     scanf("%d", &Filme.codigo[i]);
     fflush(stdin);
-    printf("Digite o nome do Filme %d: ", i+1);
-    gets(Filme.nome[i]); 
+    printf("Digite o nome do Filme %d: ", i + 1);
+    gets(Filme.nome[i]);
     fflush(stdin);
-    printf("Digite o genero do Filme %d (Suspense, Terror, Romance, Comedia): ", i+1);
+    printf("Digite o genero do Filme %d (Suspense, Terror, Romance, Comedia): ", i + 1);
     gets(Filme.genero[i]);
-    fflush(stdin);   
+    fflush(stdin);
     int ret = strcmp("suspense", Filme.genero[i]);
     int ret2 = strcmp("Suspense", Filme.genero[i]);
     int ret3 = strcmp("SUSPENSE", Filme.genero[i]);
-    if (ret == 0 || ret2 == 0 || ret3 == 0){
+    if (ret == 0 || ret2 == 0 || ret3 == 0)
+    {
       Filme.quantidadeSuspense++;
     }
-    printf("Digite a quantidade do Filme %d: ", i+1);
+    printf("Digite a quantidade do Filme %d: ", i + 1);
     scanf("%d", &Filme.quantidadeDisponivel[i]);
     fflush(stdin);
     Filme.totalCadastrado++;
+  }
+    printf("\n");       
+    system("pause");
+    system("cls");
+
+  // Criando um arquivo .txt e Salvando os Primeiros Filmes cadastrados nesse arquivo txt.
+  FILE *arquivo;
+  FILE *arquivoEntrada;
+  arquivo = fopen("teste.txt", "wt");
+  arquivoEntrada = fopen("teste.txt", "wt");
+
+  printf("\n                        ** Lista de Filmes Cadastrado Agora**\n\n");
+
+  if (arquivo == NULL)
+  {
+    printf("Nao foi possivel acessar o arquivo.");
+  }
+  else
+  {
+    for (i = 0; i < j; i++)
+    {
+      fprintf(arquivoEntrada, "%d %s %s %d; \n", Filme.codigo[i], Filme.nome[i], Filme.genero[i], Filme.quantidadeDisponivel[i]);
+      printf("Codigo: %d; Nome: %s; Genero: %s; Quantidade: %d; \n", Filme.codigo[i], Filme.nome[i], Filme.genero[i], Filme.quantidadeDisponivel[i]);
+    }
+    printf("\nO arquivo foi salvo com sucesso!!! \n");
+    fclose(arquivoEntrada);
+    fclose(arquivo);
+  }
+
+  printf("\n");       
+  system("pause");
+  system("cls");
+  menuPrincipal();
+}
+
+void cadastrarMaisFilmes()
+{
+  // Cadastrando Mais Filmes
+  printf("\n ");
+  system("cls");
+  printf("\nFilmes ja cadastrados: %d\n", Filme.totalCadastrado);
+
+  int i = 0, j = 0, k = 0;
+  FILE *arquivo;
+  FILE *arquivoEntrada;
+  arquivo = fopen("teste.txt", "a");
+  arquivoEntrada = fopen("teste.txt", "a");
+
+  printf("\n                        ****** Cadastrar Mais Filmes ********\n\n");
+  printf("Digite a quantidade de filmes que voce deseja cadastrar: ");
+  scanf("%d", &j);
+
+  for (i = Filme.totalCadastrado, k = 0; k < j; k++)
+  {
+    printf("\n                       ***** Filme %d *****\n\n", Filme.totalCadastrado + 1 );
+    printf("Digite o codigo do Filme %d: ", Filme.totalCadastrado + 1);
+    scanf("%d", &Filme.codigo[i]);
+    fflush(stdin);
+    printf("Digite o nome do Filme %d: ", Filme.totalCadastrado + 1);
+    gets(Filme.nome[i]);
+    fflush(stdin);
+    printf("Digite o genero do Filme %d (Suspense, Terror, Romance, Comedia): ", Filme.totalCadastrado + 1 );
+    gets(Filme.genero[i]);
+    fflush(stdin);
+    int ret = strcmp("suspense", Filme.genero[i]);
+    int ret2 = strcmp("Suspense", Filme.genero[i]);
+    int ret3 = strcmp("SUSPENSE", Filme.genero[i]);
+    if (ret == 0 || ret2 == 0 || ret3 == 0)
+    {
+      Filme.quantidadeSuspense++;
+    }
+    printf("Digite a quantidade do Filme %d: ", Filme.totalCadastrado + 1);
+    scanf("%d", &Filme.quantidadeDisponivel[i]);
+    fflush(stdin);
+    Filme.totalCadastrado++;
+
+    if (arquivo == NULL)
+    {
+      printf("Nao foi possivel acessar o arquivo.");
+    }
+    else
+    { 
+        fprintf(arquivoEntrada, "%d %s %s %d \n", Filme.codigo[i], Filme.nome[i], Filme.genero[i], Filme.quantidadeDisponivel[i]);    
+    }
+  }
+    fclose(arquivoEntrada);
+    fclose(arquivo);
+
     printf("\n ");
     system("pause");
     system("cls");
-    menuPrincipal();
-  }
-  printf("\n                        ** Lista de Filmes **\n\n");
-  for (i = 0; i < j; i++)
-  {    
-    printf("Filme %d. Codigo: %d; Nome: %s; Genero: %s; Quantidade: %d; \n", i+1, Filme.codigo[i], Filme.nome[i], Filme.genero[i], Filme.quantidadeDisponivel[i]);
-  }
-  printf("\n                     **Fim da Lista de Filmes**\n\n");
 
-   printf("\nQuantidade suspense: ",Filme.quantidadeSuspense);
-   printf("\n");
-
-    FILE *arquivo;
-    FILE *arquivoEntrada;
-    arquivo = fopen("teste.txt", "wt");
-    arquivoEntrada = fopen("teste.txt", "wt");
-   
-    if (arquivo == NULL)
+/*
+    // ver cadastrados agora
+    printf("\n                        ** Lista de Filmes Cadastrado Agora**\n\n");
+    
+    for (i = Filme.totalCadastrado, k=0; k < j; i--, k++)
     {
-        printf("Nao foi possivel acessar o arquivo.");
+      printf("Codigo: %d; Nome: %s; Genero: %s; Quantidade: %d; \n", Filme.codigo[i], Filme.nome[i], Filme.genero[i], Filme.quantidadeDisponivel[i]);
     }
-    else
-    {
-        printf("\nO arquivo foi acessado com sucesso!!! \n");
+  
 
-        for (i = 0; i < j; i++)
-        {
-          fprintf(arquivoEntrada,"%d %s %s %d \n", Filme.codigo[i], Filme.nome[i], Filme.genero[i], Filme.quantidadeDisponivel[i]);
-        }
-        printf("\nO arquivo foi acessado com sucesso!!! \n");
-
-        fclose(arquivoEntrada);
-        fclose(arquivo);
-    } 
-    menuPrincipal();  
+  printf("\n ");
+  system("pause");
+  system("cls"); 
+*/ 
+  menuPrincipal();
 }
 
-void listarFilmes(){
+void listarFilmes()
+{
   FILE *arquivo;
   int codigoFilme, quantidadeFilmeDisponivel, i;
   char nomeFilme[100], generoFilme[100];
@@ -144,24 +237,52 @@ void listarFilmes(){
 
   printf("\n\n                  ****** Listando Todos os Filmes *******\n");
   printf("                    ****** Conteudo do Arquivo *******\n\n");
-  for(i=0; i < Filme.totalCadastrado; i++){
-   // (fscanf(arquivo, "%d %s %s %d", Filme.codigo[i], Filme.nome[i], Filme.genero[i], Filme.quantidadeDisponivel[i]) != EOF);
-     printf("Codigo: %d; Nome: %s; Genero: %s; Quantidade: %d; \n", Filme.codigo[i], Filme.nome[i], Filme.genero[i], Filme.quantidadeDisponivel[i]);
+
+ for (i = 0; i < Filme.totalCadastrado; i++)
+  {
+    //fscanf(arquivo, "%d %s %s %d", FilmeArquivo.codigo[i], FilmeArquivo.nome[i], FilmeArquivo.genero[i], FilmeArquivo.quantidadeDisponivel[i]);
+    printf("Codigo: %d; Nome: %s; Genero: %s; Quantidade: %d; \n", Filme.codigo[i], Filme.nome[i], Filme.genero[i], Filme.quantidadeDisponivel[i]);
   }
- /* while (fscanf(arquivo, "%d %s %s %d", Filme.codigo, Filme.nome, Filme.genero, Filme.quantidadeDisponivel) != EOF){
-    printf("Codigo: %d; Nome: %s; Genero: %s; Quantidade: %d; \n", codigoFilme, nomeFilme, generoFilme, quantidadeFilmeDisponivel);       
+
+ for (i = 0; i < Filme.totalCadastrado; i++)
+  {
+    //(fscanf(arquivo, "%d %s %s %d", FilmeArquivo.codigo[i], FilmeArquivo.nome[i], FilmeArquivo.genero[i], FilmeArquivo.quantidadeDisponivel[i]) != EOF);
+   // printf("Codigo: %d; Nome: %s; Genero: %s; Quantidade: %d; \n", FilmeArquivo.codigo[i], FilmeArquivo.nome[i], FilmeArquivo.genero[i], FilmeArquivo.quantidadeDisponivel[i]);
+  }
+
+/*for (i = 0; i < Filme.totalCadastrado; i++)
+  {
+    fscanf(arquivo, "%d %s %s %d", &FilmeArquivo.codigo[i], FilmeArquivo.nome[i], FilmeArquivo.genero[i], &FilmeArquivo.quantidadeDisponivel[i]);
+    printf("Codigo: %d; Nome: %s; Genero: %s; Quantidade: %d; \n", FilmeArquivo.codigo[i], FilmeArquivo.nome[i], FilmeArquivo.genero[i], FilmeArquivo.quantidadeDisponivel[i]);
+    //FilmeArquivo.totalCadastrado++;
   }*/
-  fclose(arquivo);
+
+  /*while(fscanf(arquivo, "%d %s %s %d", &FilmeArquivo.codigo, FilmeArquivo.nome, FilmeArquivo.genero, &FilmeArquivo.quantidadeDisponivel)!= EOF)
+    printf("Codigo: %d; Nome: %s; Genero: %s; Quantidade: %d; \n", FilmeArquivo.codigo, FilmeArquivo.nome, FilmeArquivo.genero, FilmeArquivo.quantidadeDisponivel);
+  fclose(arquivo);*/
+  
+  /*while(fscanf(arquivo, "%d %s %s %d", &codigoFilme, &nomeFilme, &generoFilme, &quantidadeFilmeDisponivel) != EOF)
+    printf("Codigo: %d; Nome: %s; Genero: %s; Quantidade: %d; \n", codigoFilme, nomeFilme, generoFilme, quantidadeFilmeDisponivel);       
+  fclose(arquivo);*/
+
+  /*while (fscanf(arquivo, "%d %s %s %d", Filme.codigo, Filme.nome, Filme.genero, Filme.quantidadeDisponivel) != EOF){
+     printf("Codigo: %d; Nome: %s; Genero: %s; Quantidade: %d; \n", codigoFilme, nomeFilme, generoFilme, quantidadeFilmeDisponivel);
+   }*/
+
+  
   printf("\n");
   system("PAUSE");
   menuPrincipal();
 }
-void MenuConsultarFilme(){
+
+void MenuConsultarFilme()
+{
   menuPrincipal();
   return;
 }
 
-void  ReservarFilme(){
+void ReservarFilme()
+{
   menuPrincipal();
   return;
 }
