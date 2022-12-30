@@ -45,7 +45,7 @@ void escrever(char f[])
 
             fprintf(file, "%s %d %.2f\n", nome, idade, altura);
 
-            printf("\nDigite 1 para INSERIRIR outro registro ou outro numero para SAIR: ");
+            printf("\nDigite 1 para INSERIR outro registro ou outro numero para SAIR: ");
             scanf("%d", &opcao);
             fflush(stdin);
 
@@ -113,7 +113,7 @@ void escreverMais(char f[])
 
             fprintf(file, "%s %d %.2f\n", nome, idade, altura);
 
-            printf("\nDigite 1 para INSERIRIR outro registro ou outro numero para SAIR: ");
+            printf("\nDigite 1 para INSERIR outro registro ou outro numero para SAIR: ");
             scanf("%d", &opcao);
             fflush(stdin);
         } while (opcao == 1);

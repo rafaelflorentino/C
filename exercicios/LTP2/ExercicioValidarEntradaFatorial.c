@@ -12,73 +12,87 @@ int Fatorial(int N);
 void ProcFatorial(int N, int *Resul);
 int LerValidar();
 void ProcLerValidar(int *Nr);
-void  Finalizacao();
+void Finalizacao();
 
-//Principal-------------------------------------------------------------------------------------------------------------
+// Principal-------------------------------------------------------------------------------------------------------------
 int main()
-{   int Numero, Aux;
-    //Primeiro valor 
+{
+    int Numero, Aux;
+    // Primeiro valor
     system("color 2");
     Numero = LerValidar();
-    printf("\nFuncao Fatorial :      %d! = %d\n",Numero,Fatorial(Numero));
+    printf("\nFuncao Fatorial :      %d! = %d\n", Numero, Fatorial(Numero));
     ProcFatorial(Numero, &Aux);
-    printf("\nProcedimento Fatorial : %d! = %d\n\n\n",Numero,Aux);
-     
-    //Segundo valor
+    printf("\nProcedimento Fatorial : %d! = %d\n\n\n", Numero, Aux);
+
+    // Segundo valor
     ProcLerValidar(&Numero);
-    printf("\nFuncao Fatorial :     %d! = %d\n",Numero,Fatorial(Numero));
+    printf("\nFuncao Fatorial :     %d! = %d\n", Numero, Fatorial(Numero));
     ProcFatorial(Numero, &Aux);
-    printf("\nProcedimento Fatorial :  %d! = %d\n",Numero,Aux);
-     
-    //Finalização   
+    printf("\nProcedimento Fatorial :  %d! = %d\n", Numero, Aux);
+
+    // Finalização
     Finalizacao();
     return 0;
 }
 //---------------------------------------------------------------------------------------------------------------------------------
 
-//Função Fatorial
+// Função Fatorial
 int Fatorial(int N)
-{    int fator = 1, cont;   
-     for(cont = 1; cont <= N; cont++)
-            fator = fator * cont;      
-     return fator;   
+{
+    int fator = 1, cont;
+    for (cont = 1; cont <= N; cont++)
+    {
+        fator = fator * cont;
+    }
+    return fator;
 }
 
-//Procedimento Fatorial
+// Procedimento Fatorial
 void ProcFatorial(int N, int *Resul)
-{    int cont;   *Resul = 1;   
-     for(cont = 1; cont <= N; cont++)
-            *Resul = *Resul * cont;        
+{
+    int cont;
+    *Resul = 1;
+    for (cont = 1; cont <= N; cont++)
+    {
+        *Resul = *Resul * cont;
+    }
+    return;
 }
 
-//Função Ler Validar------------------------------------------------------------------------------------------------
+// Função Ler Validar------------------------------------------------------------------------------------------------
 int LerValidar()
-{   int Nr;
-
+{
+    int Nr;
     do
-    {   printf("\nInforme um inteiro entre 0 e 13 : ");
-        scanf("%d",&Nr);    
-        if((Nr < 0) || (Nr > 13))
-              printf("ERRO !!! Valor Invalido ... Tente novamente ...\n\n\n");          
-    }  while ((Nr < 0) || (Nr > 13));
+    {
+        printf("\nInforme um inteiro entre 0 e 13 : ");
+        scanf("%d", &Nr);
+        if ((Nr < 0) || (Nr > 13))
+            printf("ERRO !!! Valor Invalido ... Tente novamente ...\n\n\n");
+    } while ((Nr < 0) || (Nr > 13));
     return Nr;
 }
 
-//Procedimento Ler validar
+// Procedimento Ler validar
 void ProcLerValidar(int *Nr)
-{   do
-    {   printf("Informe um inteiro entre 0 e 13 : ");
-        scanf("%d",Nr);    
-        if((*Nr < 0) || (*Nr > 13))
-              printf("ERRO !!! Valor Invalido ... Tente novamente ...\n\n\n");          
-    }  while ((*Nr < 0) || (*Nr > 13));  
-    return;  
+{
+    do
+    {
+        printf("Informe um inteiro entre 0 e 13 : ");
+        scanf("%d", Nr);
+        if ((*Nr < 0) || (*Nr > 13))
+        {
+            printf("ERRO !!! Valor Invalido ... Tente novamente ...\n\n\n");
+        }
+    } while ((*Nr < 0) || (*Nr > 13));
+    return;
 }
 //-------------------------------------------------------------------------------------------------------------------
 
-//Proc Finalização
-void  Finalizacao()
-{   printf("\nDigite qualquer TECLA para TERMINAR o PROGRAMA .... ");
+// Proc Finalização
+void Finalizacao()
+{
+    printf("\nDigite qualquer TECLA para TERMINAR o PROGRAMA .... ");
     getch();
 }
-
