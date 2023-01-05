@@ -1,3 +1,9 @@
+/*
+ Objetivo : leia os dados de uma planilha, depois salve os dados lidos em um novo arquivo binário.
+ Entrada : Nome do arquivo binário que será criado.
+ Saida : arquivo binário.
+ Aluno: Rafael Florentino.
+*/
 #include <stdio.h>
 #include <string.h>
 #include <conio.h>
