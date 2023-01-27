@@ -1,7 +1,8 @@
 /*
- Objetivo : 
- Entrada : Valor1 e valor2.
- Saida : Valores trocados.
+ Objetivo : Fazer funções por referência que recebe e dobra o valor de 2 números inteiros, uma função que triplica o 
+ o valor de 2 números float, uma função que troque o valor de 2 caracteres, uma função que troca o valor de 2 palavras.
+ Entrada : Dois inteiros.
+ Saida : Valor dos Interios dobrados, dos Float triplicados, dos char trocados e das palavras trocados.
  Aluno : Rafael Florentino.
 */
 #include <stdlib.h>
