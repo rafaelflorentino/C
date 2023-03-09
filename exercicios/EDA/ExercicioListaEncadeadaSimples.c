@@ -10,7 +10,9 @@
 */
 #include <stdio.h>
 /* Typedefs e Estruturas */
-typedef struct s_cel
+/*  Lista encadeada simples, boa para inserir novos elementos, lugares diferentes da memória, primeiro ponteiro aponta pro proximo 
+e o último ponteiro do último elemento aponta para null, dinâmica, tamanho variável, começa do primeiro no da lista, percorre todos os elementos*/
+typedef struct s_cel 
 {
     float valor;
     struct s_cel *next;

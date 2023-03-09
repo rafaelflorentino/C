@@ -7,7 +7,7 @@
 #include <stdio.h> 
 #include <stdlib.h>
 #include <conio.h>
-       
+// Lista encadeada circular o último ponterio aponta para o primeiro e o primeiro aponta para o último.     
 struct tElemento { 
         int info; 
         struct tElemento *prox; 

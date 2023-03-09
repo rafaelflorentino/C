@@ -6,7 +6,8 @@
 */
 #include <stdio.h>
 #include <stdlib.h>
-
+/* Lista duplamente encadeada tem dois poneiros um apontando pra prosimo elemento e outro ponteiro apontando para o 
+elemento anterior, da para ir pra frente e pra trás por qualquer elemento da lista*/
 typedef struct Tipo_Lista{
     int cod;
     struct Tipo_Lista *Prox;
